@@ -125,6 +125,16 @@ class OpensslFlags(unittest.TestCase):
         self.assertEqual(cmd[2:], ["-connect", "example.com:8443", "-servername", "example.com",
                                    "-verify_hostname", "example.com"])
 
+    def test_homebrew_openssl_is_preferred_over_system_libressl(self):
+        # Apple silicon Homebrew, then Intel Homebrew, then LibreSSL (which can't verify host names).
+        self.assertEqual(cert.OPENSSL_PATHS, ("/opt/homebrew/bin/openssl", "/usr/local/bin/openssl", "/usr/bin/openssl"))
+        for present, want in ((cert.OPENSSL_PATHS, "/opt/homebrew/bin/openssl"),
+                              (("/usr/local/bin/openssl", "/usr/bin/openssl"), "/usr/local/bin/openssl"),
+                              (("/usr/bin/openssl",), "/usr/bin/openssl"),
+                              ((), None)):
+            with mock.patch.object(cert.os, "access", side_effect=lambda p, mode: p in present):
+                self.assertEqual(cert.find_openssl(), want, present)
+
     def test_libressl_never_gets_verify_hostname(self):
         # LibreSSL 3.3 aborts on unknown options, which would look like a broken host.
         cmd = cert.s_client_cmd("/usr/bin/openssl", "example.com", 443, False)

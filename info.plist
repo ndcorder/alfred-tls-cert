@@ -133,7 +133,7 @@
 Items: 1) expiry summary (warns when fewer than WARN_DAYS days left or expired; subtitle = issuer · TLS version · verify result), 2) SANs, 3) verify result and chain.
   ↩ copy plain-text summary of everything · ⌘↩ open crt.sh for the host · ⌘L full detail · ⌘C item value (summary / SAN list / SHA-256)
 
-Uses /opt/homebrew/bin/openssl (falls back to /usr/bin/openssl = LibreSSL, which cannot verify hostnames, so names are also matched against the SANs locally).
+Uses Homebrew OpenSSL (/opt/homebrew/bin/openssl, then /usr/local/bin/openssl; falls back to /usr/bin/openssl = LibreSSL, which cannot verify hostnames, so names are also matched against the SANs locally).
 Timeout 8 s. Successful results cache for 5 minutes in the workflow cache folder; errors are never cached.
 Configure Workflow: Warning days (WARN_DAYS, default 30).
 Tests: /usr/bin/python3 -B -m unittest test_cert</string>

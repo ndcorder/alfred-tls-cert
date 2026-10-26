@@ -42,7 +42,7 @@ Successful checks are cached for five minutes in Alfred's workflow cache. Errors
 
 - macOS with Alfred 5 and the Powerpack
 - `/usr/bin/python3` (installed with the Xcode Command Line Tools)
-- OpenSSL from Homebrew at `/opt/homebrew/bin/openssl` is used when present. Otherwise the workflow uses `/usr/bin/openssl` (LibreSSL), which cannot verify host names, so the workflow matches the name against the SANs itself.
+- OpenSSL from Homebrew is used when present: `/opt/homebrew/bin/openssl` (Apple silicon), then `/usr/local/bin/openssl` (Intel). Otherwise the workflow uses `/usr/bin/openssl` (LibreSSL), which cannot verify host names, so the workflow matches the name against the SANs itself.
 
 ## Icons
 

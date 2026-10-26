@@ -19,7 +19,8 @@ import sys
 import time
 import urllib.parse
 
-OPENSSL_PATHS = ("/opt/homebrew/bin/openssl", "/usr/bin/openssl")
+# Homebrew OpenSSL (Apple silicon, then Intel) before the system LibreSSL.
+OPENSSL_PATHS = ("/opt/homebrew/bin/openssl", "/usr/local/bin/openssl", "/usr/bin/openssl")
 TIMEOUT = 8
 CACHE_DIR = os.environ.get("alfred_workflow_cache", "/tmp/alfred-cert-check")
 CACHE_TTL = 300

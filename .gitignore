@@ -1,0 +1,6 @@
+# Per-install Configure Workflow values (personal paths, API keys)
+prefs.plist
+__pycache__/
+*.pyc
+*.alfredworkflow
+.DS_Store
